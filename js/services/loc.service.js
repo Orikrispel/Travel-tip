@@ -3,6 +3,16 @@ import { utilService } from './util.service.js'
 const PLACES_STORAGE_KEY = 'placesDB'
 
 _createPlaces()
+const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
+export const locService = {
+    //   getLocs,
+    query,
+    get,
+    remove,
+    save,
+}
+
+_createPlaces()
 
 export const locService = {
     //   getLocs,
