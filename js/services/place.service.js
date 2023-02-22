@@ -4,7 +4,12 @@ const PLACES_STORAGE_KEY = 'placesDB'
 
 _createPlaces()
 
-export const placeService = {}
+export const placeService = {
+  query,
+  get,
+  remove,
+  save,
+}
 
 function query() {
   return storageService.query(PLACES_STORAGE_KEY).then((places) => places)
