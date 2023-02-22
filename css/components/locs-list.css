@@ -1,0 +1,47 @@
+.location-list {
+  padding: 10px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 10px;
+}
+
+.place-container {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px;
+  grid-template-rows: 60px;
+  justify-items: center;
+  align-items: center;
+  padding: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  border-bottom: 4px solid gold;
+  margin-block-end: 20px;
+}
+
+.place-container:hover {
+  border-bottom: 4px solid rgb(231, 196, 0);
+}
+
+.map-container {
+  display: grid;
+  position: relative;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-flow: column;
+  justify-items: center;
+  text-align: center;
+}
+
+/* .location-icon {
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  width: 38px;
+  background-color: white;
+  padding: 6px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+} */
+
+.btn-delete,
+.btn-pan {
+  cursor: pointer;
+}

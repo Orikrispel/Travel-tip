@@ -3,6 +3,7 @@ import { utilService } from './util.service.js'
 const PLACES_STORAGE_KEY = 'placesDB'
 
 _createPlaces()
+
 const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
 export const locService = {
     //   getLocs,
@@ -12,23 +13,13 @@ export const locService = {
     save,
 }
 
-_createPlaces()
-
-export const locService = {
-    //   getLocs,
-    query,
-    get,
-    remove,
-    save,
-}
-
-function getLocs() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs)
-        }, 2000)
-    })
-}
+// function getLocs() {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve(locs)
+//         }, 2000)
+//     })
+// }
 
 function query() {
     return storageService.query(PLACES_STORAGE_KEY).then((places) => places)
@@ -51,11 +42,10 @@ function save(place) {
 }
 
 function _createPlaces() {
-    let places = utilService.get(PLACES_STORAGE_KEY, places.id)
+    let places = utilService.loadFromStorage(PLACES_STORAGE_KEY)
     if (!places || !places.length) {
         _createDemoPlaces()
     }
-    return places
 }
 
 function _createDemoPlaces() {
