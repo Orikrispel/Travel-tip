@@ -1,7 +1,7 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 const PLACES_STORAGE_KEY = 'placesDB'
-
+const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
 export const locService = {
   //   getLocs,
   query,
