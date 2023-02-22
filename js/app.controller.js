@@ -40,9 +40,7 @@ function onAddMarker() {
 // From placeKeeper:
 function onDeleteLoc(elBtn) {
   const placeId = elBtn.dataset.id
-  locService
-    .remove(placeId)
-    .then(locService.query().then((locs) => console.log(locs)))
+  locService.remove(placeId).then(() => renderPlacesList())
 
   //   locService.query().then((locs) => {
   //     console.log('Locations:', locs)
@@ -51,17 +49,18 @@ function onDeleteLoc(elBtn) {
 }
 
 // From placeKeeper:
-function renderPlacesList(locs) {
-  console.log(locs)
-  const list = document.querySelector('.places-list')
-  let strHTMLs = []
-  strHTMLs = locs.map(
-    (loc) => `<div class="place-container">${loc.name}
-      <button class="btn-pan" data-id="${loc.id}" onclick="onPanTo(this)">Go</button>
-      <div class="btn-delete" data-id="${loc.id}" onclick="onDeleteLoc(this)">✗</div>
-    </div>`
-  )
-  list.innerHTML = strHTMLs.join('')
+function renderPlacesList() {
+  locService.query().then((locs) => {
+    const list = document.querySelector('.places-list')
+    let strHTMLs = []
+    strHTMLs = locs.map(
+      (loc) => `<div class="place-container">${loc.name}
+        <button class="btn-pan" data-id="${loc.id}" onclick="onPanTo(this)">Go</button>
+        <div class="btn-delete" data-id="${loc.id}" onclick="onDeleteLoc(this)">✗</div>
+      </div>`
+    )
+    list.innerHTML = strHTMLs.join('')
+  })
 }
 
 function onGetLocs() {
