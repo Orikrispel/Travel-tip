@@ -11,6 +11,7 @@ export const locService = {
     get,
     remove,
     save,
+    saveByPos
 }
 
 // function getLocs() {
@@ -34,6 +35,15 @@ function remove(placeId) {
 }
 
 function save(place) {
+    if (query().then(places => )) {
+        return storageService.put(PLACES_STORAGE_KEY, place)
+    } else {
+        return storageService.post(PLACES_STORAGE_KEY, place)
+    }
+}
+
+function saveByPos(pos) {
+    place = query()
     if (place.id) {
         return storageService.put(PLACES_STORAGE_KEY, place)
     } else {
@@ -69,6 +79,6 @@ function _createPlace(name, pos) {
         pos,
         weather: '',
         createdAt: Date.now(),
-        updatedAt: '',
+        updatedAt: Date.now(),
     }
 }

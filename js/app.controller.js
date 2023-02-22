@@ -8,6 +8,7 @@ window.onGetLocs = onGetLocs
 window.onDeleteLoc = onDeleteLoc
 window.onGetUserPos = onGetUserPos
 window.renderPlacesList = renderPlacesList
+window.onSearch = onSearch
 
 function onInit() {
     mapService
@@ -19,9 +20,9 @@ function onInit() {
 }
 
 function renderPosByQueryStringParams() {
-  const queryStringParams = new URLSearchParams(window.location.search)
-  const pos = queryStringParams.get('pos')
-  if (!pos) return
+    const queryStringParams = new URLSearchParams(window.location.search)
+    const pos = queryStringParams.get('pos')
+    if (!pos) return
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -82,4 +83,14 @@ function onGetUserPos() {
 function onPanTo(elBtn) {
     const placeId = elBtn.dataset.id
     locService.get(placeId).then(place => mapService.panTo(place.pos.lat, place.pos.lng))
+}
+
+function onSearch(ev, term) {
+    ev.preventDefault()
+    mapService.getPlacePos(term).then(pos => {
+        mapService.addMarker(pos)
+        mapService.panTo(pos.lat, pos.lng)
+        locService.saveByPos(pos)
+    }
+    )
 }

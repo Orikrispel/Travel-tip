@@ -1,7 +1,9 @@
+const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
 export const mapService = {
     initMap,
     addMarker,
     panTo,
+    getPlacePos
 }
 
 // Var that is used throughout this Module (not global)
@@ -62,19 +64,9 @@ function _connectGoogleApi() {
     })
 }
 
-getPlaceData()
-function getPlaceData(pos = { lat: 31, lng: 32 }) {
-    //   let res = loadFromStorage(WIKI_SEARCH_RESULTS_KEY)
-    //   if (res) {
-    //     return Promise.resolve(res)
-    //   }
-    const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
-    const PlaceUrl = `https://maps.googleapis.com
-    /maps/api/geocode/json?latlng=${pos.lat},${pos.lng}=${GEOCODE_API_KEY}`
-    const prm = axios.get(PlaceUrl)
-    return prm.then((res) => {
-        res = res.data
-        console.log(res)
-        return res
-    })
+function getPlacePos(term) {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${GEOCODE_API_KEY}`
+    return axios.get(url).then((res) =>
+        res.data.results[0].geometry.location
+    )
 }
