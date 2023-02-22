@@ -11,16 +11,8 @@ export const locService = {
     get,
     remove,
     save,
-    saveByPos
+    addPlace
 }
-
-// function getLocs() {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             resolve(locs)
-//         }, 2000)
-//     })
-// }
 
 function query() {
     return storageService.query(PLACES_STORAGE_KEY).then((places) => places)
@@ -35,20 +27,15 @@ function remove(placeId) {
 }
 
 function save(place) {
-    if (query().then(places => )) {
+    if (!place.id) {
         return storageService.put(PLACES_STORAGE_KEY, place)
     } else {
         return storageService.post(PLACES_STORAGE_KEY, place)
     }
 }
 
-function saveByPos(pos) {
-    place = query()
-    if (place.id) {
-        return storageService.put(PLACES_STORAGE_KEY, place)
-    } else {
-        return storageService.post(PLACES_STORAGE_KEY, place)
-    }
+function addPlace(name, pos) {
+    return save(_createPlace(name, pos))
 }
 
 function _createPlaces() {
