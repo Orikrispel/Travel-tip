@@ -2,6 +2,8 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 const PLACES_STORAGE_KEY = 'placesDB'
 
+_createPlaces()
+
 export const locService = {
     getLocs,
     query,
@@ -9,11 +11,6 @@ export const locService = {
     remove,
     save
 }
-
-const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
-]
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -44,10 +41,11 @@ function save(place) {
 }
 
 function _createPlaces() {
-    let places = util.get(PLACES_STORAGE_KEY, places.id)
+    let places = utilService.get(PLACES_STORAGE_KEY, places.id)
     if (!places || !places.length) {
         _createDemoPlaces()
     }
+    return places
 }
 
 function _createDemoPlaces() {
