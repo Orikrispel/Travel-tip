@@ -17,12 +17,16 @@ function onInit() {
       console.log('Map is ready')
     })
     .catch(() => console.log('Error: cannot init map'))
+  renderPosByQueryStringParams()
 }
 
 function renderPosByQueryStringParams() {
-    const queryStringParams = new URLSearchParams(window.location.search)
-    const pos = queryStringParams.get('pos')
-    if (!pos) return
+  const queryStringParams = new URLSearchParams(window.location.search)
+  const lat = queryStringParams.get('lat')
+  const lng = queryStringParams.get('lng')
+
+  if (!lat || !lng) return
+  mapService.panTo(lat, lng)
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -93,11 +97,18 @@ function onPanTo(elBtn) {
 }
 
 function onSearch(ev, term) {
-    ev.preventDefault()
-    mapService.getPlacePos(term).then(pos => {
-        mapService.addMarker(pos)
-        mapService.panTo(pos.lat, pos.lng)
-        locService.saveByPos(pos)
-    }
-    )
+  ev.preventDefault()
+  mapService.getPlacePos(term).then((pos) => {
+    mapService.addMarker(pos)
+    mapService.panTo(pos.lat, pos.lng)
+    locService.saveByPos(pos)
+    const queryStringParams = `?lat=${pos.lat}&lng=${pos.lng}`
+    const newUrl =
+      window.location.protocol +
+      '//' +
+      window.location.host +
+      window.location.pathname +
+      queryStringParams
+    window.history.pushState({ path: newUrl }, '', newUrl)
+  })
 }
