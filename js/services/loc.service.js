@@ -1,5 +1,5 @@
-import { storageService } from './services/async-storage.service.js'
-import { utilService } from './service/util.service.js'
+import { storageService } from './async-storage.service.js'
+import { utilService } from './util.service.js'
 const PLACES_STORAGE_KEY = 'placesDB'
 
 export const locService = {
