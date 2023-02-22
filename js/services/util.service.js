@@ -1,6 +1,7 @@
 export const utilService = {
   saveToStorage,
   loadFromStorage,
+  clearLocalStorage,
   makeId,
   randomPastTime,
   randomPetName,

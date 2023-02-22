@@ -40,12 +40,14 @@ function onAddMarker() {
 // From placeKeeper:
 function onDeleteLoc(elBtn) {
   const placeId = elBtn.dataset.id
-  locService.remove(placeId)
-  locService.query().then((locs) => {
-    // console.log('Locations:', locs)
-    renderPlacesList(locs)
-    // document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
-  })
+  locService
+    .remove(placeId)
+    .then(locService.query().then((locs) => console.log(locs)))
+
+  //   locService.query().then((locs) => {
+  //     console.log('Locations:', locs)
+  // document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
+  //   })
 }
 
 // From placeKeeper:
