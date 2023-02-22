@@ -1,6 +1,7 @@
 export const utilService = {
   saveToStorage,
   loadFromStorage,
+  clearLocalStorage,
   makeId,
   randomPastTime,
   randomPetName,
@@ -17,6 +18,10 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
   const data = localStorage.getItem(key)
   return data ? JSON.parse(data) : undefined
+}
+
+function clearLocalStorage() {
+  window.localStorage.clear()
 }
 
 function makeId(length = 5) {
