@@ -6,21 +6,13 @@ _createPlaces()
 
 const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
 export const locService = {
-  //   getLocs,
-  query,
-  get,
-  remove,
-  save,
-  saveByPos,
+    //   getLocs,
+    query,
+    get,
+    remove,
+    save,
+    saveByPos
 }
-
-// function getLocs() {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             resolve(locs)
-//         }, 2000)
-//     })
-// }
 
 function query() {
   return storageService.query(PLACES_STORAGE_KEY).then((places) => places)
@@ -35,20 +27,20 @@ function remove(placeId) {
 }
 
 function save(place) {
-  if (query().then((places) => console.log(places))) {
-    return storageService.put(PLACES_STORAGE_KEY, place)
-  } else {
-    return storageService.post(PLACES_STORAGE_KEY, place)
-  }
+    if (query().then(places => )) {
+        return storageService.put(PLACES_STORAGE_KEY, place)
+    } else {
+        return storageService.post(PLACES_STORAGE_KEY, place)
+    }
 }
 
 function saveByPos(pos) {
-  let place = query()
-  if (place.id) {
-    return storageService.put(PLACES_STORAGE_KEY, place)
-  } else {
-    return storageService.post(PLACES_STORAGE_KEY, place)
-  }
+    place = query()
+    if (place.id) {
+        return storageService.put(PLACES_STORAGE_KEY, place)
+    } else {
+        return storageService.post(PLACES_STORAGE_KEY, place)
+    }
 }
 
 function _createPlaces() {

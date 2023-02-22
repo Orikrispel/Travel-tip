@@ -17,7 +17,6 @@ function onInit() {
       console.log('Map is ready')
     })
     .catch(() => console.log('Error: cannot init map'))
-  renderPosByQueryStringParams()
 }
 
 function renderPosByQueryStringParams() {
@@ -102,13 +101,5 @@ function onSearch(ev, term) {
     mapService.addMarker(pos)
     mapService.panTo(pos.lat, pos.lng)
     locService.saveByPos(pos)
-    const queryStringParams = `?lat=${pos.lat}&lng=${pos.lng}`
-    const newUrl =
-      window.location.protocol +
-      '//' +
-      window.location.host +
-      window.location.pathname +
-      queryStringParams
-    window.history.pushState({ path: newUrl }, '', newUrl)
   })
 }
