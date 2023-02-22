@@ -19,6 +19,10 @@ function loadFromStorage(key) {
   return data ? JSON.parse(data) : undefined
 }
 
+function clearLocalStorage() {
+  window.localStorage.clear()
+}
+
 function makeId(length = 5) {
   var txt = ''
   var possible =
