@@ -1,4 +1,4 @@
-const GEOCODE_API_KEY = 'AIzaSyAaeVqcfMAlJj1ZQfNXP9pkOBtojwlJwnQ'
+const GEOCODE_API_KEY = 'PUT API KEY HERE'
 export const mapService = {
   initMap,
   addMarker,
@@ -52,7 +52,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
   if (window.google) return Promise.resolve()
-  const API_KEY = 'AIzaSyAO7yp1xijauLBLNDaJaB_A_uo0NY_IvfI'
+  const API_KEY = 'PUT API KEY HERE'
   var elGoogleApi = document.createElement('script')
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
   elGoogleApi.async = true
