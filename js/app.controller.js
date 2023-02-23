@@ -15,18 +15,19 @@ function onInit() {
     .initMap()
     .then(() => {
       console.log('Map is ready')
+      renderPosByQueryStringParams()
     })
     .catch(() => console.log('Error: cannot init map'))
-  renderPosByQueryStringParams()
   renderPlacesList()
 }
 
 function renderPosByQueryStringParams() {
   const queryStringParams = new URLSearchParams(window.location.search)
   const lat = +queryStringParams.get('lat')
+  console.log('lat', lat)
   const lng = +queryStringParams.get('lng')
-  Promise.resolve(mapService.panTo(lat, lng))
   if (!lat || !lng) return
+  mapService.panTo(lat, lng)
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -46,11 +47,19 @@ function onAddMarker() {
 function onDeleteLoc(elBtn) {
   const placeId = elBtn.dataset.id
   locService.remove(placeId).then(() => renderPlacesList())
+}
 
-  //   locService.query().then((locs) => {
-  //     console.log('Locations:', locs)
-  // document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
-  //   })
+function onGetUserPos() {
+  getPosition()
+    .then((pos) => {
+      mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+      document.querySelector(
+        '.user-pos'
+      ).innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+    })
+    .catch((err) => {
+      console.log('err!!!', err)
+    })
 }
 
 // From placeKeeper:
@@ -70,23 +79,9 @@ function renderPlacesList() {
 
 function onGetLocs() {
   locService.query().then((locs) => {
-    // console.log('Locations:', locs)
     renderPlacesList(locs)
     // document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
   })
-}
-
-function onGetUserPos() {
-  getPosition()
-    .then((pos) => {
-      // console.log('User position is:', pos.coords)
-      document.querySelector(
-        '.user-pos'
-      ).innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-    })
-    .catch((err) => {
-      console.log('err!!!', err)
-    })
 }
 
 function onPanTo(elBtn) {

@@ -9,25 +9,31 @@
 </head>
 
 <body>
-    <h1>TravelTip</h1>
-    <form onsubmit="onSearch(event, this.elements['seach-value'].value)">
-        <input type="text" name="seach-value" placeholder="Search for anywhere">
-        <button type="submit" value="Submit">search</button>
-    </form>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <aside class="location-list">
-        <h2>Saved Locations:</h2>
-        <div class="places-list"></div>
-    </aside>
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+    <mainc class="main-layout">
+        <h1 class="logo col1">TravelTip</h1>
+        <form class="col2" onsubmit="onSearch(event, this.elements['seach-value'].value)">
+            <input type="text" name="seach-value" placeholder="Search for anywhere">
+            <button type="submit" value="Submit">search</button>
+        </form>
+        <aside class="location-list col1">
+            <h2>Saved Locations:</h2>
+            <div class="places-list"></div>
+        </aside>
+        <div class="col2" id="map" style="width: 100%; height: 400px;"></div>
+        <div class="btn-group col1">
+            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+            <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
+            <!-- <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button> -->
+            <!-- <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button> -->
+        </div>
+        <div class="col2">
+            <p>You are at: <span class="user-pos"></span></p>
+            <p>Locations:
+            <pre class="locs"></pre>
+            </p>
+        </div>
+    </mainc>
 
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations:
-    <pre class="locs"></pre>
-    </p>
 
     <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
