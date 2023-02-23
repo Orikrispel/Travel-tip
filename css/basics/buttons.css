@@ -1,5 +1,4 @@
-/* button {
+.btn-pan {
   background-color: var(--primary-color);
   border: none;
-  border-bottom: 4px solid var(--secondary-color);
-} */
+}
